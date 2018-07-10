@@ -18,3 +18,9 @@ To use Amazon Rekognition to analyze an image uploaded on S3, using Lambda servi
 3) Lambda function calls rekognition.detectLabels API for image in S3 bucket.
     - Region: Since rekognition API is not supported in us-west-1, needed to use us-west-2 as region (even though lambda function is present in us-west-1)
     - S3 access: The bucket also needed to be in same region as in rekogntion. Buckets in other regions not accessible by rekognition APIs.
+
+4) S3 image upload triggers lambda function. Use the create_s3_trigger_event.sh script that takes s3 resource parameters from s3_resources_define.sh.
+    - Add trigger: Use lambda add permission (lambda trigger) to allow s3 to invoke it.
+    - Configure the trigger event from S3. Like what prefix/suffix of objects should trigger the event.
+    - Use CloudWatch to look at the logs to find out if lambda got triggered when the right image is uploaded to the s3 bucket.
+    - Use uplaod_to_s3.sh script to upload the image into the s3 bucket.
