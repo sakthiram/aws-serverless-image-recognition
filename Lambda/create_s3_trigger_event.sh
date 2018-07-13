@@ -2,6 +2,14 @@
 # Set Env variables
 source lambda_resources_define.sh
 source s3_resources_define.sh
+# Check for arguments
+if [ $# -eq 2 ]
+    then
+    function=$1
+    obj_prefix=$2
+    s3_trigger_sid="s3_trigger_${function}_sid"
+fi
+
 lambda_function_arn=`aws lambda get-function --function-name $function --region $region --query "Configuration.FunctionArn" --output text`
 # Add permission for S3 triggering Lambda
 aws lambda add-permission \

@@ -5,7 +5,7 @@ account_id=`aws sts get-caller-identity --query "Account" --output text`
 function="image_analyze_function"
 role_arn="arn:aws:iam::$account_id:role/S3_Rek_access"
 #AWS env config
-run_env="python3.6"
+run_env="python2.7" # Prebuilt packages for PIL are for Python2.7
 region="us-west-2"
 handler="lambda_handler"
-timeout=10
+timeout=30
